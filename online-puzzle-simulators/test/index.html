@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<link rel="stylesheet" type="text/css" href="https://siue.edu/~throber/cube2/style.css?verz=20200924" />
+	<title>Online Rubik's Cube Simulator</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script charset="utf-8" src="https://siue.edu/~throber/cube2/cuber-3d/cuber.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://siue.edu/~throber/cube2/cuber-3d/cube.css">
+	<script
+		data-cfasync="false">var freestar = freestar || {}; freestar.hitTime = Date.now(); freestar.queue = freestar.queue || []; freestar.config = freestar.config || {}; freestar.debug = window.location.search.indexOf('fsdebug') === -1 ? false : true; freestar.config.enabled_slots = []; !function (a, b) { var c = b.getElementsByTagName("script")[0], d = b.createElement("script"), e = "https://a.pub.network/ruwix-com"; e += freestar.debug ? "/qa/pubfig.min.js" : "/pubfig.min.js", d.async = !0, d.src = e, c.parentNode.insertBefore(d, c) }(window, document); freestar.initCallback = function () { (freestar.config.enabled_slots.length === 0) ? freestar.initCallbackCalled = false : freestar.newAdSlots(freestar.config.enabled_slots) }</script>
+</head>
+
+<body class="innerpage">
+	<script>
+			(function (i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date(); a = s.createElement(o),
+					m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+		ga('create', 'UA-31683673-1', 'auto');
+		ga('send', 'pageview');
+	</script>
+	<div id="wrapper" class="hfeed">
+		<div class="wrapAll clearfix">
+			<div class="sidebar" id="sidebarContent">
+			</div>
+			<div id="preventMouseHoverOnPageLoad">
+			</div>
+			<div class="mainsection">
+				<div class="headerLinks">
+					<a class="user" href="/contribute/">Contribute</a>
+				</div>
+				<div class="tabs clearfix" id="tabsContent">
+				</div>
+				<div class="article clearfix">
+					<section id="content" role="main">
+						<article>
+							<section class="entry-content">
+								<link rel="stylesheet" type="text/css" href="simulator.css" />
+
+								<h1>Online Rubik's Cube Simulator</h1>
+								<p><strong>Play with the 3D Rubik's Cube simulator online. Press the scramble button and
+										try to figure out the solution and practice.</strong></p>
+								<p>Use your keyboard: the buttons on your keyboard are assigned to each face, according
+									to the <a href="/the-rubiks-cube/notation/">notation</a>. </p>
+								<ul>
+									<li>Face: <strong>F R U B L D</strong></li>
+									<li>Slice: <strong>M E S</strong></li>
+									<li>Whole: <strong>X Y Z</strong></li>
+								</ul>
+								<p>Uppercase letters do clockwise, while lowercase keys make inverse rotations.</p>
+								<p><strong>Use your mouse</strong> to rotate the layers, or swipe the screen if you're
+									using a touch device. Swipe the pieces to rotate a face or do it outside the cube to
+									change its orientation.</p>
+
+								<div id="cubeControls">
+									<a onclick="cube.undo();" title="Undo">&cularr;</a>
+									<a onclick="cube.redo();" title="Redo">&curarr;</a>
+									<a onclick="cube.shuffle(10);">Shuffle</a>
+								</div>
+								<div id="container"></div>
+
+
+								<style>
+									#cubeControls {
+										width: 300px;
+										text-align: center;
+										position: relative;
+										margin: auto;
+										top: 65px;
+										z-index: 999;
+									}
+
+									#cubeControls a {
+										background: #3d81f6;
+										color: white;
+										text-decoration: none;
+										font-size: 20px;
+										padding: 3px 15px;
+										border-radius: 10px;
+										display: inline-block;
+										cursor: pointer;
+										font-weight: bold;
+									}
+
+									#cubeControls a:hover {
+										background: #2e5089;
+									}
+
+									#container {
+										width: 100%;
+										height: 800px;
+										background: #000;
+										background: -moz-radial-gradient(center, ellipse cover, #444 0%, #000000 90%);
+										background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #444), color-stop(90%, #000000));
+										background: -webkit-radial-gradient(center, ellipse cover, #444 0%, #000000 90%);
+										background: -o-radial-gradient(center, ellipse cover, #444 0%, #000000 90%);
+										background: -ms-radial-gradient(center, ellipse cover, #444 0%, #000000 90%);
+										background: radial-gradient(ellipse at center, #444 0%, #000000 90%);
+										filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#000000', GradientType=1);
+									}
+
+									@media screen and (max-width: 1200px) {
+										#container {
+											height: 500px;
+										}
+									}
+								</style>
+								<script>
+									function initCube3d() {
+										var useLockedControls = true,
+											controls = useLockedControls ? ERNO.Locked : ERNO.Freeform;
+
+										var ua = navigator.userAgent,
+											isIe = ua.indexOf('MSIE') > -1 || ua.indexOf('Trident/') > -1;
+
+										window.cube = new ERNO.Cube({
+											hideInvisibleFaces: true,
+											controls: controls,
+											renderer: isIe ? ERNO.renderers.IeCSS3D : null
+										});
+
+										var container = document.getElementById('container');
+										container.appendChild(cube.domElement);
+
+										if (controls === ERNO.Locked) {
+											var fixedOrientation = new THREE.Euler(Math.PI * 0.1, Math.PI * -0.25, 0);
+											cube.object3D.lookAt(cube.camera.position);
+											cube.rotation.x += fixedOrientation.x;
+											cube.rotation.y += fixedOrientation.y;
+											cube.rotation.z += fixedOrientation.z;
+										}
+									}
+									$(document).ready(function () {
+										initCube3d();
+										$('#readLink').addClass('active');
+									});
+								</script>
+
+							</section>
+						</article>
+						<div class="freestarwrap" id="ruwix_billboard_incontent_4">
+							<script
+								data-cfasync="false">freestar.config.enabled_slots.push({ placementName: "ruwix_billboard_incontent_4", slotId: "ruwix_billboard_incontent_4" });</script>
+						</div>
+						
+						<div class="wrapBackToTop">
+							<div id="stick-here2"></div>
+							<div class="backToTopPage" id="stickThis2"> Back To The Top <span>&#10173;</span></div>
+						</div>
+					</section>
+					<aside id="sidebar">
+						<div id="primary" class="widget-area">
+							<div id="topOfSidebar"></div>
+							<div class="freestarwrap" id="ruwix_halfpage_1">
+								<script
+									data-cfasync="false">freestar.config.enabled_slots.push({ placementName: "ruwix_halfpage_1", slotId: "ruwix_halfpage_1" });</script>
+							</div>
+
+							<div id="rightSidebarContent">
+							</div>
+							<div id="sidebarFeaturedArticles2"></div>
+						</div>
+					</aside>
+				</div>
+				<div class="pagefooter" id="footerContent">
+				</div>
+			</div>
+		</div>
+	</div>
+	<a id="back2Top" title="Back to top" href="#">&#10148;</a>
+	<div id="myCookieConsent">
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="https://siue.edu/~throber/cube2/script.js"></script>
+</body>
+
+</html>
