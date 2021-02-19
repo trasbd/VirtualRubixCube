@@ -1,0 +1,4 @@
+This branch is meant to investigate how ruwix.com's simulator is animated, so we may be able to
+repurpose some of the code to our specifications. The prototype-simulators/ directory is our current
+simulator (pulled from https://github.com/qbacuber/RubiksCubeJS). The online-puzzle-simulators is
+the source code pulled from https://ruwix.com/online-puzzle-simulators/.
