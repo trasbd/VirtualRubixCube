@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en-US" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb#">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width" />
+	<link rel="stylesheet" type="text/css" href="/style.css?verz=20200924" />
+	<title>Online Rubik's Cube Simulator</title>
+	<meta name="description" content="Play with the 3D Rubik's Cube simulator online. Press the scramble button and try to figure out the solution and practice."/>
+	<meta property="og:title" content="Online Rubik's Cube Simulator" />
+	<meta property="og:description" content="Play with the 3D Rubik's Cube simulator online. Press the scramble button and try to figure out the solution and practice." />
+	<link rel="canonical" href="https://ruwix.com/online-puzzle-simulators/" />
+	<meta property="og:url" content="https://ruwix.com/online-puzzle-simulators/" />
+	<meta property="og:image" content="https://ruwix.com/online-puzzle-simulators/images/og.jpg" />
+	<meta property="og:image:secure_url" content="https://ruwix.com/online-puzzle-simulators/images/og.jpg" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script  charset="utf-8" src="cuber-3d/cuber.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="cuber-3d/cube.css">
+	<meta property="og:site_name" content="Ruwix" />
+	<meta property="fb:admins" content="fricikoma"/>
+	<meta property="fb:admins" content="1037899304" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="website" />
+	<meta property="fb:app_id" content="355198271187833"/>
+<script data-cfasync="false">var freestar = freestar || {};freestar.hitTime = Date.now();freestar.queue = freestar.queue || [];freestar.config = freestar.config || {};freestar.debug = window.location.search.indexOf('fsdebug') === -1 ? false : true;freestar.config.enabled_slots = [];!function(a,b){var c=b.getElementsByTagName("script")[0],d=b.createElement("script"),e="https://a.pub.network/ruwix-com";e+=freestar.debug?"/qa/pubfig.min.js":"/pubfig.min.js",d.async=!0,d.src=e,c.parentNode.insertBefore(d,c)}(window,document);freestar.initCallback = function () { (freestar.config.enabled_slots.length === 0) ? freestar.initCallbackCalled = false : freestar.newAdSlots(freestar.config.enabled_slots) }</script>
+</head>
+<body class="innerpage">
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	  ga('create', 'UA-31683673-1', 'auto');
+	  ga('send', 'pageview');
+	</script>
+	<div id="wrapper" class="hfeed">
+		<div class="wrapAll clearfix">
+			<div class="sidebar" id="sidebarContent">
+			</div>
+			<div id="preventMouseHoverOnPageLoad">			
+			</div>
+			<div class="mainsection">
+				<div class="headerLinks">
+					 <a class="user" href="/contribute/">Contribute</a> 
+				</div>
+				<div class="tabs clearfix" id="tabsContent">
+				</div>
+				<div class="article clearfix">
+					<section id="content" role="main">	
+						<article>
+							<section class="entry-content">
+	<link rel="stylesheet" type="text/css" href="simulator.css" />
+				
+		<h1>Online Rubik's Cube Simulator</h1>
+		<p><strong>Play with the 3D Rubik's Cube simulator online. Press the scramble button and try to figure out the solution and practice.</strong></p>
+		<p>Use your keyboard: the buttons on your keyboard are assigned to each face, according to the <a href="/the-rubiks-cube/notation/">notation</a>. </p>
+		<ul>
+			<li>Face: <strong>F R U B L D</strong></li>
+			<li>Slice: <strong>M E S</strong></li>
+			<li>Whole: <strong>X Y Z</strong></li>
+		</ul>
+		<p>Uppercase letters do clockwise, while lowercase keys make inverse rotations.</p>
+		<p><strong>Use your mouse</strong> to rotate the layers, or swipe the screen if you're using a touch device. Swipe the pieces to rotate a face or do it outside the cube to change its orientation.</p>
+
+		<div id="cubeControls">
+			<a onclick="cube.undo();" title="Undo">&cularr;</a>
+			<a onclick="cube.redo();" title="Redo">&curarr;</a>
+			<a onclick="cube.shuffle(10);">Shuffle</a>
+		</div>
+		<div id="container" ></div>
+		
+		<div class="sendThisToNavBar">
+			<h3><a href="/online-puzzle-simulators/">Puzzle Simulators</a></h3>
+			<ul>
+				<li><a href="/online-puzzle-simulators/2x2x2-pocket-cube-simulator.php">2x2x2</a></li>
+				<li><a href="/online-puzzle-simulators/3x3x3-rubiks-cube-simulator.php">3x3x3</a></li>
+				<li><a href="/online-puzzle-simulators/">3x3x3 (3D)</a></li>
+				<li><a href="/online-puzzle-simulators/4x4x4-rubiks-revenge-cube-simulator.php">4x4x4</a></li>
+				<li><a href="/online-puzzle-simulators/5x5x5-professors-cube-simulator.php">5x5x5</a></li>
+				<li><a href="/online-puzzle-simulators/6x6x6-rubiks-cube-simulator.php">6x6x6</a></li>
+				<li><a href="/online-puzzle-simulators/7x7x7-rubiks-cube-simulator.php">7x7x7</a></li>
+				<li><a href="/online-puzzle-simulators/8x8x8-rubiks-cube-simulator.php">8x8x8</a></li>
+				<li><a href="/online-puzzle-simulators/9x9x9-rubiks-cube-simulator.php">9x9x9</a></li>
+				<li><a href="/online-puzzle-simulators/10x10x10-rubiks-cube-simulator.php">10x10x10</a></li>
+				<li><a href="/online-puzzle-simulators/11x11x11-rubiks-cube-simulator.php">11x11x11</a></li>
+				<li><a href="/online-puzzle-simulators/square-1-simulator.php">Square-1</a></li>
+				<li><a href="/online-puzzle-simulators/rubiks-clock-simulator.php">Rubik's Clock</a></li>
+				<li><a href="/online-puzzle-simulators/megaminx-simulator.php">Megaminx</a></li>
+				<li><a href="/online-puzzle-simulators/pyraminx-simulator.php">Pyraminx</a></li>
+				<li><a href="/online-puzzle-simulators/skewb-simulator.php">Skewb</a></li>
+				<li><a title="Hungarian Rings simulator" href="/online-puzzle-simulators/hungarian-rings/">Hungarian Rings</a></li>
+				<li><a title="15-Puzzle" href="/online-puzzle-simulators/sliding-15-puzzle/">15-Puzzle</a></li>
+			</ul>
+			<h3><a href="/">Main pages</a></h3>
+		</div>
+		
+		<h2>Find more puzzle simulators in the sidebar</h2>
+		<p>We have an online simulator for each WCA competition puzzles and a few extras.</p>
+
+
+<style>
+#cubeControls {
+    width: 300px;
+    text-align: center;
+    position: relative;
+    margin: auto;
+    top: 65px;
+    z-index: 999;
+}
+#cubeControls a {
+    background: #3d81f6;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    padding: 3px 15px;
+    border-radius: 10px;
+    display: inline-block;
+    cursor: pointer;
+    font-weight: bold;
+}
+#cubeControls a:hover {
+	background: #2e5089;
+}
+#container {
+	width: 100%;
+	height: 800px;
+    background: #000;
+    background: -moz-radial-gradient(center, ellipse cover, #444 0%, #000000 90%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#444), color-stop(90%,#000000));
+    background: -webkit-radial-gradient(center, ellipse cover, #444 0%,#000000 90%);
+    background: -o-radial-gradient(center, ellipse cover, #444 0%,#000000 90%);
+    background: -ms-radial-gradient(center, ellipse cover, #444 0%,#000000 90%);
+    background: radial-gradient(ellipse at center, #444 0%,#000000 90%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#000000',GradientType=1 );
+}
+@media screen and (max-width: 1200px) {
+	#container {
+		height: 500px;
+	}
+}
+</style>
+<script>
+function initCube3d() {
+	var useLockedControls = true,
+		controls = useLockedControls ? ERNO.Locked : ERNO.Freeform;
+
+	var ua = navigator.userAgent,
+		isIe = ua.indexOf('MSIE') > -1 || ua.indexOf('Trident/') > -1;
+
+	window.cube = new ERNO.Cube({
+		hideInvisibleFaces: true,
+		controls: controls,
+		renderer: isIe ? ERNO.renderers.IeCSS3D : null
+	});
+
+	var container = document.getElementById( 'container' );
+	container.appendChild( cube.domElement );
+
+	if( controls === ERNO.Locked ){
+		var fixedOrientation = new THREE.Euler(  Math.PI * 0.1, Math.PI * -0.25, 0 );
+		cube.object3D.lookAt( cube.camera.position );
+		cube.rotation.x += fixedOrientation.x;
+		cube.rotation.y += fixedOrientation.y;
+		cube.rotation.z += fixedOrientation.z;
+	}	
+}
+$(document).ready( function(){ 
+	initCube3d();
+	$('#readLink').addClass('active');
+});
+</script>
+
+							</section>
+						</article>
+<div class="freestarwrap" id="ruwix_billboard_incontent_4"><script data-cfasync="false">freestar.config.enabled_slots.push({ placementName: "ruwix_billboard_incontent_4", slotId: "ruwix_billboard_incontent_4" });</script></div>
+<h3>Comments</h3>
+						<div class="commentSzektion">
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+var js, fjs = d.getElementsByTagName(s)[0];
+if (d.getElementById(id)) return;
+js = d.createElement(s); js.id = id;
+js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.10&appId=355198271187833";
+fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+<div class="fb-comments" data-href="https://ruwix.com/" data-numposts="8" order_by="reverse_time"></div>	
+						</div>
+					<div class="wrapBackToTop">
+						<div id="stick-here2"></div>
+						<div class="backToTopPage" id="stickThis2"> Back To The Top <span>&#10173;</span></div>	
+					</div>
+					</section>
+					<aside id="sidebar">
+						<div id="primary" class="widget-area">
+							<div id="topOfSidebar"></div>
+<div class="freestarwrap" id="ruwix_halfpage_1"><script data-cfasync="false">freestar.config.enabled_slots.push({ placementName: "ruwix_halfpage_1", slotId: "ruwix_halfpage_1" });</script></div>
+														
+							<div id="rightSidebarContent">
+							</div>
+							<div id="sidebarFeaturedArticles2"></div>
+						</div>
+					</aside>				
+				</div>
+				<div class="pagefooter" id="footerContent">
+				</div>
+			</div>		
+		</div>
+	</div>	
+	<div id="popupBox">
+		<div id="popupBoxClose">x</div>
+		<div id="popupBoxInner">
+			<h2>Featured Articles:</h2>
+			<div id="popupBoxFeatured" class="clearfix">			
+			</div>
+			<div>
+			</div>
+			<div class="popupBoxBox">
+				<h2 class="inline-block">Share this page:&nbsp;&nbsp;</h2>
+				<div class="inline-block">
+					<ul class="socialShareLinks">
+						<li>
+							<a class="facebook" href="https://www.facebook.com/sharer.php?u=currentpagelink" target="_blank" rel="nofollow">
+								<img src="/pics/socialicons/fb.svg" alt="Facebook">
+							</a>
+						</li>
+						<li>
+							<a class="twitter" href="https://twitter.com/intent/tweet?url=currentpagelink&text=Check%20this%20out:" target="_blank" rel="nofollow">
+								<img src="/pics/socialicons/twitter.svg" alt="Twitter">
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div>
+			</div>
+			<div class="popupBoxBox">
+				<h2 class="inline-block">Follow us:&nbsp;&nbsp;</h2> 
+				<a title="Ruwix on Facebook" target="blank" href="https://www.facebook.com/online.rubiks.cube.solver"><img width="30" height="30" alt="facebook" src="/pics/socialicons/fb.svg"/></a> 
+				<a title="Our Twitter" target="_blank" href="https://twitter.com/#!/RuwixCube"><img width="30" height="30" alt="twitter" src="/pics/socialicons/twitter.svg" /></a>
+				<a title="Rubik's Cube Blog" href="/blog/"><img width="30" height="30" alt="rubik blog" src="/pics/socialicons/rss.svg" /></a>
+			</div>
+		</div>
+	</div>
+	<div id="popupShadow">
+	</div>	
+	<a id="back2Top" title="Back to top" href="#">&#10148;</a>
+	<div id="myCookieConsent">
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<script src="/script.js"></script>
+</body>
+</html>

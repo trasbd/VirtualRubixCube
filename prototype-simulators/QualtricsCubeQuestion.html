@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="PL">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>RUBIKS CUBE</title>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: #ccc;
+        }
+
+        .cube {
+            width: 200px;
+            height: 200px;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+            position: relative;
+            perspective: 3000px;
+            transform-style: preserve-3d;
+            transform: rotateX(-35deg) rotateY(-30deg);
+            transition: linear 0.5s;
+        }
+
+        .box {
+            width: 200px;
+            height: 200px;
+            border: 2px solid black;
+            padding: 3px;
+            margin: 3px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            grid-gap: 3px;
+            background: black;
+            position: absolute;
+        }
+
+        .green {
+            transform: rotateX(0deg) translateZ(100px);
+        }
+
+        .blue {
+            transform: rotateX(180deg) translateZ(100px);
+        }
+
+        .red {
+            transform: rotateY(90deg) translateZ(100px) rotate(90deg);
+        }
+
+        .orange {
+            transform: rotateY(-90deg) translateZ(100px) rotate(-90deg);
+        }
+
+        .yellow {
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+
+        .white {
+            transform: rotateX(90deg) translateZ(100px);
+        }
+
+        .item {
+            height: 100%;
+            width: 100%;
+            border: 1px solid black;
+            box-sizing: border-box;
+        }
+
+        .button_panel {
+            width: 300px;
+            margin-top: 250px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 10px;
+            box-sizing: border-box;
+            border: 1px solid black;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            background-color: #267429;
+        }
+
+        h1 {
+            text-align: right;
+            margin: 10px;
+        }
+
+        @media(min-width: 400px) {
+            .button_panel {
+                width: 400px;
+            }
+        }
+
+        @media(min-width: 500px) {
+            .button_panel {
+                width: 500px;
+            }
+        }
+
+        @media(min-width: 600px) {
+            .button_panel {
+                width: 600px;
+            }
+        }
+
+        @media(min-width: 700px) {
+            .button_panel {
+                width: 700px;
+            }
+        }
+
+        @media(min-width: 900px) {
+            .button_panel {
+                width: 900px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cube">
+        <div class="box blue">
+            <div class="item item_id00"></div>
+            <div class="item item_id01"></div>
+            <div class="item item_id02"></div>
+            <div class="item item_id10"></div>
+            <div class="item item_id11"></div>
+            <div class="item item_id12"></div>
+            <div class="item item_id20"></div>
+            <div class="item item_id21"></div>
+            <div class="item item_id22"></div>
+        </div>
+
+        <div class="box white">
+            <div class="item item_id30"></div>
+            <div class="item item_id31"></div>
+            <div class="item item_id32"></div>
+            <div class="item item_id40"></div>
+            <div class="item item_id41"></div>
+            <div class="item item_id42"></div>
+            <div class="item item_id50"></div>
+            <div class="item item_id51"></div>
+            <div class="item item_id52"></div>
+        </div>
+
+        <div class="box green">
+            <div class="item item_id60"></div>
+            <div class="item item_id61"></div>
+            <div class="item item_id62"></div>
+            <div class="item item_id70"></div>
+            <div class="item item_id71"></div>
+            <div class="item item_id72"></div>
+            <div class="item item_id80"></div>
+            <div class="item item_id81"></div>
+            <div class="item item_id82"></div>
+        </div>
+
+        <div class="box yellow">
+            <div class="item item_id90"></div>
+            <div class="item item_id91"></div>
+            <div class="item item_id92"></div>
+            <div class="item item_id100"></div>
+            <div class="item item_id101"></div>
+            <div class="item item_id102"></div>
+            <div class="item item_id110"></div>
+            <div class="item item_id111"></div>
+            <div class="item item_id112"></div>
+        </div>
+
+        <div class="box red">
+            <div class="item item_id120"></div>
+            <div class="item item_id121"></div>
+            <div class="item item_id122"></div>
+            <div class="item item_id130"></div>
+            <div class="item item_id131"></div>
+            <div class="item item_id132"></div>
+            <div class="item item_id140"></div>
+            <div class="item item_id141"></div>
+            <div class="item item_id142"></div>
+        </div>
+
+        <div class="box orange">
+            <div class="item item_id150"></div>
+            <div class="item item_id151"></div>
+            <div class="item item_id152"></div>
+            <div class="item item_id160"></div>
+            <div class="item item_id161"></div>
+            <div class="item item_id162"></div>
+            <div class="item item_id170"></div>
+            <div class="item item_id171"></div>
+            <div class="item item_id172"></div>
+        </div>
+    </div>
+
+    <div class="button_panel">
+
+        <button onclick="MUVE_U()">MOVE U</button>
+        <button onclick="MUVE_Up()">MOVE U'</button>
+
+        <button onclick="MUVE_R()">MOVE R</button>
+        <button onclick="MUVE_Rp()">MOVE R'</button>
+
+        <button onclick="MUVE_L()">MOVE L</button>
+        <button onclick="MUVE_Lp()">MOVE L'</button>
+
+        <button onclick="MUVE_Dp()">MOVE D'</button>
+        <button onclick="MUVE_D()">MOVE D</button>
+
+        <button onclick="MUVE_F()">MOVE F</button>
+        <button onclick="MUVE_Fp()">MOVE F'</button>
+
+        <button onclick="MUVE_B()">MOVE B</button>
+        <button onclick="MUVE_Bp()">MOVE B'</button>
+
+        <button onclick="n_of_moves()">number of moves</button>
+        <button onclick="cube_start()">RESET</button>
+        <button onclick="SCRAMBLE()">SCRAMBLE</button>
+        <br />
+        <button class="left" onclick="rotateL()">Rotate Left</button>
+        <button class="right" onclick="rotateR()">Rotate Right</button>
+        <button class="up" onclick="rotateU()">Rotate Up</button>
+        <button class="down" onclick="rotateD()">Rotate Down</button>
+        <button class="down" onclick="rotateLp()">plus left</button>
+    </div>
+    <h1> qbacuber 2020&copy;</h1>
+
+    <script>
+        cube_start();
+        draw();
+    </script>
+</body>
+
+</html>
