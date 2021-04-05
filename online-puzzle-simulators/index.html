@@ -52,11 +52,34 @@
 								<p>Uppercase letters do clockwise, while lowercase keys make inverse rotations.</p>
 
 								<div id="cubeControls">
-									<a onclick="cube.undo();" title="Undo">&cularr;</a>
-									<a onclick="cube.redo();" title="Redo">&curarr;</a>
-									<a onclick="cube.shuffle();">Shuffle</a>
+									<a onclick="cube.twist('f');">f</a>
+									<a onclick="cube.twist('r');">r</a>
+									<a onclick="cube.twist('u');">u</a>
+									<a onclick="cube.twist('b');">b</a>
+									<a onclick="cube.twist('l');">l</a>
+									<a onclick="cube.twist('d');">d</a>
 								</div>
+								<div id="cubeControls">
+									<a onclick="cube.twist('F');">F</a>
+									<a onclick="cube.twist('R');">R</a>
+									<a onclick="cube.twist('U');">U</a>
+									<a onclick="cube.twist('B');">B</a>
+									<a onclick="cube.twist('L');">L</a>
+									<a onclick="cube.twist('D');">D</a>
+								</div>
+								<div id="cubeControls">
+									<a onclick="cube.twist('x');">x</a>
+									<a onclick="cube.twist('y');">y</a>
+									<a onclick="cube.twist('z');">z</a>
+								</div>
+								<div id="cubeControls">
+									<a onclick="cube.twist('X');">X</a>
+									<a onclick="cube.twist('Y');">Y</a>
+									<a onclick="cube.twist('Z');">Z</a>
+								</div>
+
 								<div id="container"></div>
+
 								<div id="curtain">Shuffling...</div>
 
 
@@ -70,6 +93,7 @@
 										margin: auto;
 										top: 65px;
 										z-index: 999;
+										padding: 5px;
 									}
 
 										#cubeControls a {
@@ -101,23 +125,23 @@
 										filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#000000',GradientType=1 );
 									}
 
-                                    #curtain {
-                                        height: 100vh;
-                                        width: 100%;
-                                        background: #000;
-                                        position: absolute;
-                                        top: 110px;
-                                        font-weight: bold;
-                                        font-size: 40px;
-                                        text-align: center;
-                                        display: flex;
-                                        justify-content: center;
-                                        align-items: center;
-                                    }
+									#curtain {
+										height: 100vh;
+										width: 100%;
+										background: #000;
+										position: absolute;
+										top: 110px;
+										font-weight: bold;
+										font-size: 40px;
+										text-align: center;
+										display: flex;
+										justify-content: center;
+										align-items: center;
+									}
 
 									@media screen and (max-width: 1200px) {
 										#container {
-											height: 500px;
+											height: 400px;
 										}
 									}
 								</style>
