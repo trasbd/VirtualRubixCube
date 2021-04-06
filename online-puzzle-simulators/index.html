@@ -8,8 +8,6 @@
 	<meta property="og:description" content="Play with the 3D Rubik's Cube simulator online. Press the scramble button and try to figure out the solution and practice." />
 	<link rel="canonical" href="https://ruwix.com/online-puzzle-simulators/" />
 	<meta property="og:url" content="https://ruwix.com/online-puzzle-simulators/" />
-	<meta property="og:image" content="https://ruwix.com/online-puzzle-simulators/images/og.jpg" />
-	<meta property="og:image:secure_url" content="https://ruwix.com/online-puzzle-simulators/images/og.jpg" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 	<meta property="og:site_name" content="Ruwix" />
 	<meta property="fb:admins" content="fricikoma" />
@@ -17,25 +15,46 @@
 	<meta property="og:locale" content="en_US" />
 	<meta property="og:type" content="website" />
 	<meta property="fb:app_id" content="355198271187833" />
-	<script data-cfasync="false">var freestar = freestar || {}; freestar.hitTime = Date.now(); freestar.queue = freestar.queue || []; freestar.config = freestar.config || {}; freestar.debug = window.location.search.indexOf('fsdebug') === -1 ? false : true; freestar.config.enabled_slots = []; !function (a, b) { var c = b.getElementsByTagName("script")[0], d = b.createElement("script"), e = "https://a.pub.network/ruwix-com"; e += freestar.debug ? "/qa/pubfig.min.js" : "/pubfig.min.js", d.async = !0, d.src = e, c.parentNode.insertBefore(d, c) }(window, document); freestar.initCallback = function () { (freestar.config.enabled_slots.length === 0) ? freestar.initCallbackCalled = false : freestar.newAdSlots(freestar.config.enabled_slots) }</script>
+	<script data-cfasync="false">
+		var freestar = freestar || {};
+		freestar.hitTime = Date.now();
+		freestar.queue = freestar.queue || [];
+		freestar.config = freestar.config || {};
+		freestar.debug = window.location.search.indexOf('fsdebug') === -1 ? false : true;
+		freestar.config.enabled_slots = [];
+		!function (a, b) {
+			var c = b.getElementsByTagName("script")[0],
+				d = b.createElement("script"),
+				e = "https://a.pub.network/ruwix-com";
+			e += freestar.debug ? "/qa/pubfig.min.js" : "/pubfig.min.js",
+				d.async = !0,
+				d.src = e,
+				c.parentNode.insertBefore(d, c)
+		}(window, document);
+		freestar.initCallback = function () {
+			(freestar.config.enabled_slots.length === 0)
+				? freestar.initCallbackCalled = false
+				: freestar.newAdSlots(freestar.config.enabled_slots)
+		}
+	</script>
 </head>
 <body class="innerpage">
 	<script>
 		(function (i, s, o, g, r, a, m) {
-			i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+			i['GoogleAnalyticsObject'] = r;
+			i[r] = i[r] || function () {
 				(i[r].q = i[r].q || []).push(arguments)
-			}, i[r].l = 1 * new Date(); a = s.createElement(o),
-				m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+			}, i[r].l = 1 * new Date();
+			a = s.createElement(o), m = s.getElementsByTagName(o)[0];
+			a.async = 1;
+			a.src = g;
+			m.parentNode.insertBefore(a, m)
 		})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-	ga('create', 'UA-31683673-1', 'auto');
-	ga('send', 'pageview');
+		ga('create', 'UA-31683673-1', 'auto');
+		ga('send', 'pageview');
 	</script>
 	<div id="wrapper" class="hfeed">
 		<div class="wrapAll clearfix">
-			<div class="sidebar" id="sidebarContent">
-			</div>
-			<div id="preventMouseHoverOnPageLoad">
-			</div>
 			<div class="mainsection">
 				<div class="tabs clearfix" id="tabsContent">
 				</div>
@@ -52,30 +71,37 @@
 								<p>Uppercase letters do clockwise, while lowercase keys make inverse rotations.</p>
 
 								<div id="cubeControls">
-									<a onclick="cube.twist('f');">f</a>
-									<a onclick="cube.twist('r');">r</a>
-									<a onclick="cube.twist('u');">u</a>
-									<a onclick="cube.twist('b');">b</a>
-									<a onclick="cube.twist('l');">l</a>
-									<a onclick="cube.twist('d');">d</a>
-								</div>
-								<div id="cubeControls">
-									<a onclick="cube.twist('F');">F</a>
-									<a onclick="cube.twist('R');">R</a>
-									<a onclick="cube.twist('U');">U</a>
-									<a onclick="cube.twist('B');">B</a>
-									<a onclick="cube.twist('L');">L</a>
-									<a onclick="cube.twist('D');">D</a>
-								</div>
-								<div id="cubeControls">
-									<a onclick="cube.twist('x');">x</a>
-									<a onclick="cube.twist('y');">y</a>
-									<a onclick="cube.twist('z');">z</a>
-								</div>
-								<div id="cubeControls">
-									<a onclick="cube.twist('X');">X</a>
-									<a onclick="cube.twist('Y');">Y</a>
-									<a onclick="cube.twist('Z');">Z</a>
+									<div id="controlRow">
+										<div id="controlText">Clockwise: </div>
+										<a onclick="cube.twist('F');">F</a>
+										<a onclick="cube.twist('R');">R</a>
+										<a onclick="cube.twist('U');">U</a>
+										<a onclick="cube.twist('B');">B</a>
+										<a onclick="cube.twist('L');">L</a>
+										<a onclick="cube.twist('D');">D</a>
+
+										<div id="separate"></div>
+
+										<a onclick="cube.twist('X');">X</a>
+										<a onclick="cube.twist('Y');">Y</a>
+										<a onclick="cube.twist('Z');">Z</a>
+									</div>
+
+									<div id="controlRow">
+										<div id="controlText">Counter-clockwise: </div>
+										<a onclick="cube.twist('f');">f</a>
+										<a onclick="cube.twist('r');">r</a>
+										<a onclick="cube.twist('u');">u</a>
+										<a onclick="cube.twist('b');">b</a>
+										<a onclick="cube.twist('l');">l</a>
+										<a onclick="cube.twist('d');">d</a>
+
+										<div id="separate"></div>
+
+										<a onclick="cube.twist('x');">x</a>
+										<a onclick="cube.twist('y');">y</a>
+										<a onclick="cube.twist('z');">z</a>
+									</div>
 								</div>
 
 								<div id="container"></div>
@@ -87,56 +113,77 @@
 
 								<style>
 									#cubeControls {
-										width: 300px;
-										text-align: center;
+										width: 100%;
 										position: relative;
-										margin: auto;
-										top: 65px;
-										z-index: 999;
-										padding: 5px;
+										margin-left: auto;
+										margin-right: auto;
+										top: 25px;
+										display: inline-block;
+										text-align: center;
+										z-index: 900;
 									}
 
-										#cubeControls a {
-											background: #3d81f6;
-											color: white;
-											text-decoration: none;
-											font-size: 20px;
-											padding: 3px 15px;
-											border-radius: 10px;
-											display: inline-block;
-											cursor: pointer;
-											font-weight: bold;
-										}
+                                        #cubeControls a {
+                                            background: #3d81f6;
+                                            color: white;
+                                            text-decoration: none;
+                                            font-size: 20px;
+                                            padding: 3px 15px;
+                                            border-radius: 10px;
+                                            display: inline;
+                                            cursor: pointer;
+                                            font-weight: bold;
+                                            font-family: monospace, "Lucida Console", "Courier New";
+                                        }
 
 											#cubeControls a:hover {
 												background: #2e5089;
 											}
 
+                                    #controlRow {
+                                        padding-bottom: 10px;
+										display: inline-block;
+										text-align: right;
+                                    }
+
+                                    #controlText {
+                                        display: inline;
+										position: relative;
+										margin-right: 10px;
+										margin-left: auto;
+                                        text-align: right;
+                                    }
+
+                                    #separate {
+                                        display: inline;
+                                        padding-left: 50px;
+                                    }
+
 									#container {
 										height: 400px;
 										width: 100%;
+										position: relative;
+										bottom: 50px;
 										background: #000;
 										background: -moz-radial-gradient(center, ellipse cover, #444 0%, #000000 90%);
 										background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#444), color-stop(90%,#000000));
 										background: -webkit-radial-gradient(center, ellipse cover, #444 0%,#000000 90%);
-										background: -o-radial-gradient(center, ellipse cover, #444 0%,#000000 90%);
-										background: -ms-radial-gradient(center, ellipse cover, #444 0%,#000000 90%);
 										background: radial-gradient(ellipse at center, #444 0%,#000000 90%);
-										filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#444444', endColorstr='#000000',GradientType=1 );
 									}
 
 									#curtain {
-										height: 100vh;
+										height: 95vh;
 										width: 100%;
 										background: #000;
 										position: absolute;
-										top: 110px;
+										top: 90px;
 										font-weight: bold;
 										font-size: 40px;
 										text-align: center;
 										display: flex;
 										justify-content: center;
 										align-items: center;
+										z-index: 999;
 									}
 
 									@media screen and (max-width: 1200px) {
@@ -171,11 +218,18 @@
 											moves++;
 										}
 									}
-									$(document).ready(function () {
+									jQuery(document).ready(function () {
 										initCube3d();
-										$('#readLink').addClass('active');
+										jQuery('#readLink').addClass('active');
 									});
 								</script>
+							</section>
+						</article>
+					</section>
+				</div>
+			</div>
+		</div>
+	</div>
 
 
 
