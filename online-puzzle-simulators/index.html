@@ -66,13 +66,13 @@
 								<p>Use your keyboard: the buttons on your keyboard are assigned to each face, according to the notation. </p>
 								<ul>
 									<li>Face: <strong>F R U B L D</strong></li>
-									<li>Whole: <strong>X Y Z</strong></li>
+									<li>Whole: <strong>X (&#8599 or &#8601)    Y (&#8592 or &#8594)    Z (&#8600 or &#8598)</strong></li>
 								</ul>
-								<p>Uppercase letters do clockwise, while lowercase keys make inverse rotations.</p>
+								<p>Uppercase letters do clockwise &#8635, while lowercase keys make inverse &#8634 rotations.</p>
 
 								<div id="cubeControls">
 									<div id="controlRow">
-										<div id="controlText">Clockwise: </div>
+										<div id="controlText">&#8635  Rotations: </div>
 										<a onclick="cube.twist('F');">F</a>
 										<a onclick="cube.twist('R');">R</a>
 										<a onclick="cube.twist('U');">U</a>
@@ -82,13 +82,13 @@
 
 										<div id="separate"></div>
 
-										<a onclick="cube.twist('X');">X</a>
-										<a onclick="cube.twist('Y');">Y</a>
-										<a onclick="cube.twist('Z');">Z</a>
+										<a onclick="cube.twist('X');">&#8599</a>
+										<a onclick="cube.twist('Y');">&#8592</a>
+										<a onclick="cube.twist('Z');">&#8600</a>
 									</div>
 
 									<div id="controlRow">
-										<div id="controlText">Counter-clockwise: </div>
+										<div id="controlText">&#8634  Rotations: </div>
 										<a onclick="cube.twist('f');">f</a>
 										<a onclick="cube.twist('r');">r</a>
 										<a onclick="cube.twist('u');">u</a>
@@ -98,9 +98,9 @@
 
 										<div id="separate"></div>
 
-										<a onclick="cube.twist('x');">x</a>
-										<a onclick="cube.twist('y');">y</a>
-										<a onclick="cube.twist('z');">z</a>
+										<a onclick="cube.twist('x');">&#8601</a>
+										<a onclick="cube.twist('y');">&#8594</a>
+										<a onclick="cube.twist('z');">&#8598</a>
 									</div>
 								</div>
 
@@ -112,12 +112,17 @@
 
 
 								<style>
+									li {
+										white-space: pre;
+									}
+
+
 									#cubeControls {
 										width: 100%;
 										position: relative;
 										margin-left: auto;
 										margin-right: auto;
-										top: 25px;
+										top: 35px;
 										display: inline-block;
 										text-align: center;
 										z-index: 900;
@@ -148,6 +153,8 @@
 
                                     #controlText {
                                         display: inline;
+										font-size: 22px;
+										font-weight: bold;
 										position: relative;
 										margin-right: 10px;
 										margin-left: auto;
@@ -157,6 +164,8 @@
                                     #separate {
                                         display: inline;
                                         padding-left: 50px;
+                                        font-size: 22px;
+                                        font-weight: bold;
                                     }
 
 									#container {
