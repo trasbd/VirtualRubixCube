@@ -256,20 +256,23 @@ function sameEdgeCubelet(cubelet1, cubelet2) {
 // The white cross step
 function checkSolution() {
 	console.log(""); //Makes the console a bit more readable.
-	var isSolved = true; //Is innocent until proven guilty
+	var isSolved = true; //Is solved until proven otherwise
 
-	//Get the faces of all the dependent cubes
+	//Get the faces of all the colors
 	var white = "white";
 	var red = "red";
 	var blue = "blue";
 	var green = "green";
 	var orange = "orange";
+	var yellow = "yellow";
 
+	//Find where the center pieces of each color truly are
 	var [whiteFace, whiteDirection] = findTrueFace(white);
 	var [redFace, redDirection] = findTrueFace(red);
 	var [blueFace, blueDirection] = findTrueFace(blue);
 	var [greenFace, greenDirection] = findTrueFace(green);
 	var [orangeFace, orangeDirection] = findTrueFace(orange);
+	var [yellowFace, yellowDirection] = findTrueFace(yellow);
 
 	//console.log(cube);
 	console.log(cube.faces);
@@ -306,6 +309,12 @@ function checkSolution() {
 	var orangesEastCubelet = findEastCubelet(orangeFace, orangeDirection);
 	var orangesWestCubelet = findWestCubelet(orangeFace, orangeDirection);
 
+	//Yellow face's edge cubelets
+	var yellowsNorthCubelet = findNorthCubelet(yellowFace, yellowDirection);
+	var yellowsSouthCubelet = findSouthCubelet(yellowFace, yellowDirection);
+	var yellowsEastCubelet = findEastCubelet(yellowFace, yellowDirection);
+	var yellowsWestCubelet = findWestCubelet(yellowFace, yellowDirection);
+
 
 	//This is an ugly mess, but hey, it works. We could just use an array and do these comparisons in a for loop, 
 	// but that has its own complications that Robert did not want to deal with at the time of programming this
@@ -320,7 +329,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesNorthCubelet, redsEastCubelet))
 				console.log("Lines up with " + red + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesNorthCubelet[1] == blue) {			
@@ -330,7 +339,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesNorthCubelet, bluesEastCubelet))
 				console.log("Lines up with " + blue + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesNorthCubelet[1] == green) {
@@ -340,7 +349,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesNorthCubelet, greensEastCubelet))
 				console.log("Lines up with " + green + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesNorthCubelet[1] == orange) {
@@ -350,13 +359,13 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesNorthCubelet, orangesEastCubelet))
 				console.log("Lines up with " + orange + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 		else
-			isSolved = false; //Proven guilty
+			isSolved = false; 
 	}
 	else
-		isSolved = false; //Proven guilty
+		isSolved = false; 
 
 	//Check south
 	if (whitesSouthCubelet[0] == white) {
@@ -368,7 +377,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesSouthCubelet, redsEastCubelet))
 				console.log("Lines up with " + red + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesSouthCubelet[1] == blue) {
@@ -378,7 +387,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesSouthCubelet, bluesEastCubelet))
 				console.log("Lines up with " + blue + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesSouthCubelet[1] == green) {
@@ -388,7 +397,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesSouthCubelet, greensEastCubelet))
 				console.log("Lines up with " + green + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesSouthCubelet[1] == orange) {
@@ -398,13 +407,13 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesSouthCubelet, orangesEastCubelet))
 				console.log("Lines up with " + orange + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 		else
-			isSolved = false; //Proven guilty
+			isSolved = false; 
 	}
 	else
-		isSolved = false; //Proven guilty
+		isSolved = false; 
 
 	//Check east
 	if (whitesEastCubelet[0] == white) {
@@ -416,7 +425,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesEastCubelet, redsEastCubelet))
 				console.log("Lines up with " + red + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesEastCubelet[1] == blue) {
@@ -426,7 +435,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesEastCubelet, bluesEastCubelet))
 				console.log("Lines up with " + blue + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesEastCubelet[1] == green) {
@@ -436,7 +445,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesEastCubelet, greensEastCubelet))
 				console.log("Lines up with " + green + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesEastCubelet[1] == orange) {
@@ -446,13 +455,13 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesEastCubelet, orangesEastCubelet))
 				console.log("Lines up with " + orange + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 		else
-			isSolved = false; //Proven guilty
+			isSolved = false; 
 	}
 	else
-		isSolved = false; //Proven guilty
+		isSolved = false; 
 
 	//Check west
 	if (whitesWestCubelet[0] == white) {
@@ -464,7 +473,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesWestCubelet, redsEastCubelet))
 				console.log("Lines up with " + red + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesWestCubelet[1] == blue) {
@@ -474,7 +483,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesWestCubelet, bluesEastCubelet))
 				console.log("Lines up with " + blue + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesWestCubelet[1] == green) {
@@ -484,7 +493,7 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesWestCubelet, greensEastCubelet))
 				console.log("Lines up with " + green + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 
 		else if (whitesWestCubelet[1] == orange) {
@@ -494,13 +503,13 @@ function checkSolution() {
 				|| sameEdgeCubelet(whitesWestCubelet, orangesEastCubelet))
 				console.log("Lines up with " + orange + " face.");
 			else
-				isSolved = false; //Proven guilty
+				isSolved = false; 
 		}
 		else
-			isSolved = false; //Proven guilty
+			isSolved = false; 
 	}
 	else
-		isSolved = false; //Proven guilty
+		isSolved = false; 
 
 
 	if (Qualtrics.SurveyEngine.getEmbeddedData("stepToSolve") == "2") {
