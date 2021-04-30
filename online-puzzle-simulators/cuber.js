@@ -6,12 +6,15 @@ Qualtrics.SurveyEngine.addOnload(function () {
 });
 
 Qualtrics.SurveyEngine.addOnReady(function () {
-	setTimeout(() => cube.shuffle(), 300); //Wait for a little bit to call the cube.shuffle() (gives the cube time to load)
-	var sequenceLength = Qualtrics.SurveyEngine.getEmbeddedData('shuffleSequenceLength');
 	jQuery("#solved").hide();
-	setTimeout(() => jQuery("#curtain").hide(), (sequenceLength * 500) + 150);
+	setTimeout(() => {
+		//cube.shuffle()
+		var sequenceLength = Qualtrics.SurveyEngine.getEmbeddedData('shuffleSequenceLength');
+		jQuery("#curtain").hide();
+		checkStep1();
+		//setTimeout(() => jQuery("#curtain").hide(), (sequenceLength * cube.twistDuration));
+	}, 300); //Wait a moment for the cube to load before calling its functions
 
-	//var Tester = setInterval(Test, 5000);
 });
 
 
@@ -22,25 +25,247 @@ Qualtrics.SurveyEngine.addOnUnload(function () {
 
 });
 
-var step1 = ["WXXRXX", "WXBXXX", "WXXXXX", "WXXXGX", "WOXXXX"]
 
-function checkStep1() {
-	console.log("");
-	console.log(cube.faces[0].cubelets[1].colors + " " + step1[0]);
-	console.log(cube.faces[0].cubelets[3].colors + " " + step1[1]);
-	console.log(cube.faces[0].cubelets[4].colors + " " + step1[2]);
-	console.log(cube.faces[0].cubelets[5].colors + " " + step1[3]);
-	console.log(cube.faces[0].cubelets[7].colors + " " + step1[4]);
-	console.log(ERNO.Direction.FRONT);
-	if (cube.faces[0].cubelets[1].colors == step1[0] &&
-		cube.faces[0].cubelets[3].colors == step1[1] &&
-		cube.faces[0].cubelets[4].colors == step1[2] &&
-		cube.faces[0].cubelets[5].colors == step1[3] &&
-		cube.faces[0].cubelets[7].colors == step1[4]) {
-		console.log("I think the step is solved");
-		Qualtrics.SurveyEngine.setEmbeddedData('true');
-		jQuery("#solved").show();
+
+/*
+	The following functions are used to help identify if the current step of the cube is solved.
+ 
+	To show which step is to be solved, check the bottom of the ERNO.Twist.prototype.set() function.
+ */
+
+//Find the face where the center cubelet truly is
+function findTrueFace(color) {
+	var baseFace = null;
+	var trueFace = null;
+	var direction = null;
+
+	//Find the base index of the face (i.e. "white" will always be base index 0)
+	for (var f = 0; f < cube.faces.length; f++) {
+		if (cube.faces[f].color.name == color) {
+			baseFace = cube.faces[f];
+			break;
+		}
 	}
+
+	//Find the true location of the specified face (i.e. is the white face "up"?).
+	//Since the base faces (i.e. the "white" face, or, front face) are subject to change,
+	// find the index of the face where the color truly like (i.e. does "white" reside in
+	// the "blue", or, right face?).
+	if (baseFace.center.cubelets[0].front.color.name == color)
+		return [0, "front"];
+
+	else if (baseFace.center.cubelets[0].up.color.name == color)
+		return [1, "up"];
+
+	else if (baseFace.center.cubelets[0].right.color.name == color)
+		return [2, "right"];
+
+	else if (baseFace.center.cubelets[0].down.color.name == color)
+		return [3, "down"];
+
+	else if (baseFace.center.cubelets[0].left.color.name == color)
+		return [4, "left"];
+
+	else
+		return [5, "back"];
+}
+
+
+
+
+/*
+	The next four findXCublet() functions return the colors of the edge cubelets,
+	where the first color matches the face of the colorFace (i.e. in the colorFace
+	"white", what are the surrounding cross cubelet colors?), and the second
+	color is the off-color of the edge (away from the colorFace in question).
+
+	Note that they return two values in the form of an array; refer to the
+	checkStep1() function on how those return values are assigned.
+*/
+
+function findNorthCubelet(colorFace, direction) {
+	if (direction == "front")
+		return [cube.faces[colorFace].north.front.color.name,
+			cube.faces[colorFace].north.up.color.name];
+
+	else if (direction == "up")
+		return [cube.faces[colorFace].north.up.color.name,
+			cube.faces[colorFace].north.back.color.name];
+
+	else if (direction == "right")
+		return [cube.faces[colorFace].north.right.color.name,
+			cube.faces[colorFace].north.up.color.name];
+
+	else if (direction == "down")
+		return [cube.faces[colorFace].north.down.color.name,
+			cube.faces[colorFace].north.right.color.name];
+
+	else if (direction == "left")
+		return [cube.faces[colorFace].north.left.color.name,
+			cube.faces[colorFace].north.back.color.name];
+
+	else
+		return [cube.faces[colorFace].north.back.color.name,
+			cube.faces[colorFace].north.right.color.name];
+}
+
+
+
+function findSouthCubelet(colorFace, direction) {
+	if (direction == "front")
+		return [cube.faces[colorFace].south.front.color.name,
+			cube.faces[colorFace].south.down.color.name];
+
+	else if (direction == "up")
+		return [cube.faces[colorFace].south.up.color.name,
+			cube.faces[colorFace].south.front.color.name];
+
+	else if (direction == "right")
+		return [cube.faces[colorFace].south.right.color.name,
+			cube.faces[colorFace].south.down.color.name];
+
+	else if (direction == "down")
+		return [cube.faces[colorFace].south.down.color.name,
+			cube.faces[colorFace].south.left.color.name];
+
+	else if (direction == "left")
+		return [cube.faces[colorFace].south.left.color.name,
+			cube.faces[colorFace].south.front.color.name];
+
+	else
+		return [cube.faces[colorFace].south.back.color.name,
+			cube.faces[colorFace].south.left.color.name];
+}
+
+
+
+function findEastCubelet(colorFace, direction) {
+	if (direction == "front")
+		return [cube.faces[colorFace].east.front.color.name,
+			cube.faces[colorFace].east.right.color.name];
+
+	else if (direction == "up")
+		return [cube.faces[colorFace].east.up.color.name,
+			cube.faces[colorFace].east.right.color.name];
+
+	else if (direction == "right")
+		return [cube.faces[colorFace].east.right.color.name,
+			cube.faces[colorFace].east.back.color.name];
+
+	else if (direction == "down")
+		return [cube.faces[colorFace].east.down.color.name,
+			cube.faces[colorFace].east.back.color.name];
+
+	else if (direction == "left")
+		return [cube.faces[colorFace].east.left.color.name,
+			cube.faces[colorFace].east.up.color.name];
+
+	else
+		return [cube.faces[colorFace].east.back.color.name,
+			cube.faces[colorFace].east.up.color.name];
+}
+
+
+
+function findWestCubelet(colorFace, direction) {
+	if (direction == "front")
+		return [cube.faces[colorFace].west.front.color.name,
+			cube.faces[colorFace].west.left.color.name];
+
+	else if (direction == "up")
+		return [cube.faces[colorFace].west.up.color.name,
+			cube.faces[colorFace].west.left.color.name];
+
+	else if (direction == "right")
+		return [cube.faces[colorFace].west.right.color.name,
+			cube.faces[colorFace].west.front.color.name];
+
+	else if (direction == "down")
+		return [cube.faces[colorFace].west.down.color.name,
+			cube.faces[colorFace].west.front.color.name];
+
+	else if (direction == "left")
+		return [cube.faces[colorFace].west.left.color.name,
+			cube.faces[colorFace].west.down.color.name];
+
+	else
+		return [cube.faces[colorFace].west.back.color.name,
+			cube.faces[colorFace].west.down.color.name];
+}
+
+
+
+
+/*
+	The next four findXCubelet() functions find the corner cubelets, where, like
+	the edge cubelet functions above, the first color returned is the color on the
+	colorFace, and the off colors are colors away from colorFace on the cubelet,
+	in no particular order (near impossible to find a cohesive order that will satisfy
+	every state of the cube).
+*/
+
+// THE FUNCTIONS HAVE YET TO BE IMPLEMENTED
+
+/*
+function findCubelet(colorFace, direction) {
+	if (direction == "front")
+		return cube.faces[colorFace]..front.color.name;
+	else if (direction == "up")
+		return cube.faces[colorFace]..up.color.name;
+	else if (direction == "right")
+		return cube.faces[colorFace]..right.color.name;
+	else if (direction == "down")
+		return cube.faces[colorFace]..down.color.name;
+	else if (direction == "left")
+		return cube.faces[colorFace]..left.color.name;
+	else
+		return cube.faces[colorFace]..back.color.name;
+}*/
+
+
+/*
+	The individual steps to solve. So far, only step 1 has started to be implemented
+*/
+// The white cross step
+function checkStep1() {
+	console.log(""); //Makes the console a bit more readable.
+
+	//Get the faces of all the dependent cubes
+	var white = "white";
+	var red = "red";
+	var blue = "blue";
+	var green = "green";
+	var orange = "orange";
+
+	var [whiteFace, whiteDirection] = findTrueFace(white);
+	var [redFace, redDirection] = findTrueFace(red);
+	var [blueFace, blueDirection] = findTrueFace(blue);
+	var [greenFace, greenDirection] = findTrueFace(green);
+	var [orangeFace, orangeDirection] = findTrueFace(orange);
+
+	//console.log(cube);
+	console.log(cube.faces);
+	console.log(cube.faces[whiteFace]);
+	console.log(white + " is on face " + whiteFace + ", or, the " + whiteDirection + " face.");
+
+	// White face's X cubelets
+	var whitesNorthCubelet = findNorthCubelet(whiteFace, whiteDirection);
+	var whitesSouthCubelet = findSouthCubelet(whiteFace, whiteDirection);
+	var whitesEastCubelet = findEastCubelet(whiteFace, whiteDirection);
+	var whitesWestCubelet = findWestCubelet(whiteFace, whiteDirection);
+
+	// I would think that if you find the off color of the adjacent faces, that may satisfy the white cross method,
+	//  so if you find the white edge cubelet with the red off color, and if you find the red edge cubelet (in the red face)
+	//  with the white off color, I would think that programmatically means that they lined up.
+
+	if (whitesNorthCubelet[0] == white)
+		console.log(white + " is on the north face, and the off color is " + whitesNorthCubelet[1]);
+	if (whitesSouthCubelet[0] == white)
+		console.log(white + " is on the south face, and the off color is " + whitesSouthCubelet[1]);
+	if (whitesEastCubelet[0] == white)
+		console.log(white + " is on the east face, and the off color is " + whitesEastCubelet[1]);
+	if (whitesWestCubelet[0] == white)
+		console.log(white + " is on the west face, and the off color is " + whitesWestCubelet[1]);
 }
 
 function Test() {
@@ -7909,7 +8134,14 @@ function Test() {
 
 			//ERNO.Cube -> front: ERNO.Slice -> corners: ERNO.Group -> cubelets: Array(4)
 			// -> 0: ERNO.Cubelet -> front: -> element: div.face.axisZ.faceFront.faceExtroverted
-			setTimeout(() => checkStep1(), 550);
+			//console.log(cube);
+			if (cube.isShuffling == false) {
+				//console.log("\"" + Qualtrics.SurveyEngine.getEmbeddedData("stepToSolve") + "\"");
+				if (Qualtrics.SurveyEngine.getEmbeddedData("stepToSolve") == "1") {
+					//console.log(cube.twistDuration);
+					setTimeout(() => checkStep1(), cube.twistDuration + 50); //The cubelets do not update until the twist is done
+				}
+			}
 
 		}
 		else return false;
@@ -11439,6 +11671,7 @@ function Test() {
 
 
 		shuffle: function (a, b) {
+			this.isShuffling = true;
 			a = a || 30;
 			b = b || Qualtrics.SurveyEngine.getEmbeddedData('shuffleSequence'); //Qualtrics should have this setup prior
 
@@ -11459,6 +11692,7 @@ function Test() {
 				e = d.getInverse()
 			}
 			this.finalShuffle = d
+			this.isShuffling = false;
 		},
 
 
