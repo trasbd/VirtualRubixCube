@@ -9,16 +9,16 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 	jQuery("#solved").hide();
 	Qualtrics.SurveyEngine.setEmbeddedData("stepIsSolved", "no");
 	setTimeout(() => {
-		jQuery("#curtain").hide();
-		checkSolution();
-		/*
+		//jQuery("#curtain").hide();
+		//checkSolution();
+		
 		cube.shuffle();
 		var sequenceLength = Qualtrics.SurveyEngine.getEmbeddedData('shuffleSequenceLength');
 		setTimeout(() => {
 			jQuery("#curtain").hide();
 			checkSolution();
 		}, (sequenceLength * cube.twistDuration));
-		*/
+		
 	}, 300); //Wait a moment for the cube to load before calling its functions
 
 });
