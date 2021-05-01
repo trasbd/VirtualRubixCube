@@ -383,7 +383,7 @@ function sameCornerCubelet(cubelet1, cubelet2) {
 //Check if the edge baseCubelet matches any of the possible cubelets
 function checkEdges(baseCubelet, possibleCubelets, color) {
 
-	//Check checkSolutions() for details about the possibleCubelets array order
+	//Check checkSolution() for details about the possibleCubelets array order
 
 	//console.log(baseCubelet[1] + ", " + color);
 
@@ -410,7 +410,7 @@ function checkEdges(baseCubelet, possibleCubelets, color) {
 // must be of the red face's cubelets)
 function checkCorners(baseCubelet, possibleCubelets, color1, color2) {
 
-	//Check checkSolutions() for details about the possibleCubelets array order
+	//Check checkSolution() for details about the possibleCubelets array order
 
 	//console.log(baseCubelet[1] + ", " + color1 + " ... " + baseCubelet[2] + ", " + color2);
 
