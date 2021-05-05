@@ -480,7 +480,7 @@ function checkSolution() {
 	var [orangeFace, orangeDirection] = findTrueFace(orange);
 	var [yellowFace, yellowDirection] = findTrueFace(yellow);
 
-	//console.log(cube);
+	console.log(cube);
 	//console.log(cube.faces);
 	//console.log(cube.faces[whiteFace]);
 
@@ -1079,6 +1079,8 @@ function checkSolution() {
 	if (isSolved == true) {
 		console.log("I think this step is solved");
 		Qualtrics.SurveyEngine.setEmbeddedData("stepIsSolved", "yes");
+		Qualtrics.SurveyEngine.setEmbeddedData("moveCounter",
+			(cube.moveCounter - parseInt(Qualtrics.SurveyEngine.getEmbeddedData("shuffleSequenceLength"))).toString());
 		jQuery("#solved").show();
 	}
 
@@ -1090,6 +1092,19 @@ function checkSolution() {
 
 	return isSolved; //Just in case the rest of the code needs it
 }
+
+
+
+
+
+
+
+
+
+
+/*
+	Create the cube
+*/
 
 
 (function () {
@@ -8943,8 +8958,9 @@ function checkSolution() {
 
 			//ERNO.Cube -> front: ERNO.Slice -> corners: ERNO.Group -> cubelets: Array(4)
 			// -> 0: ERNO.Cubelet -> front: -> element: div.face.axisZ.faceFront.faceExtroverted
+
 			if (cube.isShuffling == false) {
-				setTimeout(() => checkSolution(), cube.twistDuration + 50); //The cubelets do not update until the twist is done
+				setTimeout(() => checkSolution(), cube.twistDuration + 40); //The cubelets do not update until the twist is done
 			}
 
 		}
@@ -12830,7 +12846,6 @@ function checkSolution() {
 
 
 							this.immediateTwist(twist);
-
 
 
 						}
