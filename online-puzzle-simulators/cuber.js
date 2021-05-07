@@ -16,7 +16,8 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 		var sequenceLength = Qualtrics.SurveyEngine.getEmbeddedData('shuffleSequenceLength');
 		setTimeout(() => {
 			jQuery("#curtain").hide();
-			checkSolution();
+			cube.isShuffling = false;
+			//checkSolution();
 		}, (sequenceLength * cube.twistDuration));
 		
 	}, 300); //Wait a moment for the cube to load before calling its functions
@@ -574,72 +575,73 @@ function checkSolution() {
 
 
 	/*
-		Step 1, always will execute
+		Step 1
 
 		Look for the white cross (white face has all white edges, and the edges line up
 		with the center cubelets of their off colors, i.e. adjacent faces).
 	*/
+	if (parseInt(Qualtrics.SurveyEngine.getEmbeddedData("stepToSolve")) >= 1) {
+		console.log("\tStep 1");
 
-	console.log("\tStep 1");
+		//Check north
+		if (whitesCubelets[0][0] == white) {
+			console.log("The north cubelet is white and the off color is " + whitesCubelets[0][1]);
 
-	//Check north
-	if (whitesCubelets[0][0] == white) {
-		console.log("The north cubelet is white and the off color is " + whitesCubelets[0][1]);
+			//If all checkEdges() tests fail, then the cube is not solved
+			if (!checkEdges(whitesCubelets[0], redsCubelets, red) &&
+				!checkEdges(whitesCubelets[0], bluesCubelets, blue) &&
+				!checkEdges(whitesCubelets[0], greensCubelets, green) &&
+				!checkEdges(whitesCubelets[0], orangesCubelets, orange))
+				isSolved = false;
+		}
+		else
+			isSolved = false;
 
-		//If all checkEdges() tests fail, then the cube is not solved
-		if (!checkEdges(whitesCubelets[0], redsCubelets, red) &&
-			!checkEdges(whitesCubelets[0], bluesCubelets, blue) &&
-			!checkEdges(whitesCubelets[0], greensCubelets, green) &&
-			!checkEdges(whitesCubelets[0], orangesCubelets, orange))
+
+		//Check east
+		if (whitesCubelets[2][0] == white) {
+			console.log("The east cubelet is white and the off color is " + whitesCubelets[2][1]);
+
+			//If all checkEdges() tests fail, then the cube is not solved
+			if (!checkEdges(whitesCubelets[2], redsCubelets, red) &&
+				!checkEdges(whitesCubelets[2], bluesCubelets, blue) &&
+				!checkEdges(whitesCubelets[2], greensCubelets, green) &&
+				!checkEdges(whitesCubelets[2], orangesCubelets, orange))
+				isSolved = false;
+		}
+		else
+			isSolved = false;
+
+
+		//Check south
+		if (whitesCubelets[4][0] == white) {
+			console.log("The south cubelet is white and the off color is " + whitesCubelets[4][1]);
+
+			//If all checkEdges() tests fail, then the cube is not solved
+			if (!checkEdges(whitesCubelets[4], redsCubelets, red) &&
+				!checkEdges(whitesCubelets[4], bluesCubelets, blue) &&
+				!checkEdges(whitesCubelets[4], greensCubelets, green) &&
+				!checkEdges(whitesCubelets[4], orangesCubelets, orange))
+				isSolved = false;
+		}
+		else
+			isSolved = false;
+
+
+		//Check west
+		if (whitesCubelets[6][0] == white) {
+			console.log("The west cubelet is white and the off color is " + whitesCubelets[6][1]);
+
+			//If all checkEdges() tests fail, then the cube is not solved
+			if (!checkEdges(whitesCubelets[6], redsCubelets, red) &&
+				!checkEdges(whitesCubelets[6], bluesCubelets, blue) &&
+				!checkEdges(whitesCubelets[6], greensCubelets, green) &&
+				!checkEdges(whitesCubelets[6], orangesCubelets, orange))
+				isSolved = false;
+		}
+		else
 			isSolved = false;
 	}
-	else
-		isSolved = false;
-
-
-	//Check east
-	if (whitesCubelets[2][0] == white) {
-		console.log("The east cubelet is white and the off color is " + whitesCubelets[2][1]);
-
-		//If all checkEdges() tests fail, then the cube is not solved
-		if (!checkEdges(whitesCubelets[2], redsCubelets, red) &&
-			!checkEdges(whitesCubelets[2], bluesCubelets, blue) &&
-			!checkEdges(whitesCubelets[2], greensCubelets, green) &&
-			!checkEdges(whitesCubelets[2], orangesCubelets, orange))
-			isSolved = false;
-	}
-	else
-		isSolved = false;
-
-
-	//Check south
-	if (whitesCubelets[4][0] == white) {
-		console.log("The south cubelet is white and the off color is " + whitesCubelets[4][1]);
-
-		//If all checkEdges() tests fail, then the cube is not solved
-		if (!checkEdges(whitesCubelets[4], redsCubelets, red) &&
-			!checkEdges(whitesCubelets[4], bluesCubelets, blue) &&
-			!checkEdges(whitesCubelets[4], greensCubelets, green) &&
-			!checkEdges(whitesCubelets[4], orangesCubelets, orange))
-			isSolved = false;
-	}
-	else
-		isSolved = false;
-
-
-	//Check west
-	if (whitesCubelets[6][0] == white) {
-		console.log("The west cubelet is white and the off color is " + whitesCubelets[6][1]);
-
-		//If all checkEdges() tests fail, then the cube is not solved
-		if (!checkEdges(whitesCubelets[6], redsCubelets, red) &&
-			!checkEdges(whitesCubelets[6], bluesCubelets, blue) &&
-			!checkEdges(whitesCubelets[6], greensCubelets, green) &&
-			!checkEdges(whitesCubelets[6], orangesCubelets, orange))
-			isSolved = false;
-	}
-	else
-		isSolved = false;
 
 
 	
@@ -1079,8 +1081,9 @@ function checkSolution() {
 	if (isSolved == true) {
 		console.log("I think this step is solved");
 		Qualtrics.SurveyEngine.setEmbeddedData("stepIsSolved", "yes");
-		Qualtrics.SurveyEngine.setEmbeddedData("moveCounter",
-			(cube.moveCounter - parseInt(Qualtrics.SurveyEngine.getEmbeddedData("shuffleSequenceLength"))).toString());
+		console.log(cube.twistQueue.history.length);
+		Qualtrics.SurveyEngine.setEmbeddedData("moveCounter", cube.twistQueue.history.length);
+		console.log(Qualtrics.SurveyEngine.getEmbeddedData("moveCounter"));
 		jQuery("#solved").show();
 	}
 
@@ -8956,13 +8959,6 @@ function checkSolution() {
 				return new ERNO.Twist(command.invert(), degrees);
 			};
 
-			//ERNO.Cube -> front: ERNO.Slice -> corners: ERNO.Group -> cubelets: Array(4)
-			// -> 0: ERNO.Cubelet -> front: -> element: div.face.axisZ.faceFront.faceExtroverted
-
-			if (cube.isShuffling == false) {
-				setTimeout(() => checkSolution(), cube.twistDuration + 40); //The cubelets do not update until the twist is done
-			}
-
 		}
 		else return false;
 	}
@@ -12044,13 +12040,15 @@ function checkSolution() {
 		parameters.textureSize = parameters.textureSize === undefined ? 120 : parameters.textureSize;
 
 
-		this.isShuffling = false;
+		//this.isShuffling = false;
+		this.isShuffling = true;
 		this.isReady = true;
 		this.isSolving = false;
 		this.undoing = false;
 		this.render = true;
 		this.finalShuffle = null;
 		this.hideInvisibleFaces = parameters.hideInvisibleFaces === undefined ? false : parameters.hideInvisibleFaces;
+		this.solutionChecked = false;
 
 
 
@@ -12512,7 +12510,7 @@ function checkSolution() {
 				e = d.getInverse()
 			}
 			this.finalShuffle = d
-			this.isShuffling = false;
+			//this.isShuffling = false;
 		},
 
 
@@ -12796,6 +12794,14 @@ function checkSolution() {
 
 						// if( this.twistQueue.isReady ){
 
+						if (this.isShuffling === false && this.solutionChecked === false) {
+							var check = checkSolution();
+							this.solutionChecked = true;
+							if (Qualtrics.SurveyEngine.getEmbeddedData("stepIsSolved") != "yes")
+								Qualtrics.SurveyEngine.setEmbeddedData("moveCounter",
+									(cube.moveCounter -
+										parseInt(Qualtrics.SurveyEngine.getEmbeddedData("shuffleSequenceLength"))).toString());
+						}
 
 						var queue = this.undoing ? this.historyQueue : this.twistQueue;
 
@@ -12853,6 +12859,9 @@ function checkSolution() {
 						// }
 
 					}
+
+					else if (this.isTweening() !== 0 && this.solutionChecked === true)
+						this.solutionChecked = false;
 
 
 					// Our mouse controls should only be active if we are not rotating
@@ -12933,7 +12942,7 @@ function checkSolution() {
 		//  Otherwise our logic will never actually run.
 		//  The hook for this is in Cube.loop() so look there to see what's up.
 
-		cube.isShuffling = false;
+		//cube.isShuffling = false;
 
 
 		//  If the cube is already solved then our job is done before it started.
