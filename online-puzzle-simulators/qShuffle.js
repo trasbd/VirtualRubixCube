@@ -21,36 +21,32 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 			if (s < choice.length - 1) { //If not at the end of the string, check the next index
 
 				if (choice[s + 1] == "2") {
-
 					sequence += choice[s];
 					sequence += choice[s];
 					s++;
-
 				}
 
 				else if (choice[s + 1] == "'") {
-
 					sequence += choice[s].toLowerCase();
 					s++;
-
 				}
 
 				else {
 					sequence += choice[s];
 				}
-
 			}
 
 			else { //End of string, append final sequence item
 				sequence += choice[s];
 			}
 		}
-
 	}
 
 	//console.log(sequence);
-	Qualtrics.SurveyEngine.setEmbeddedData("shuffleSequence", sequence);
-	Qualtrics.SurveyEngine.setEmbeddedData("shuffleSequenceLength", sequence.length);
+
+	var step = Qualtrics.SurveyEngine.getEmbeddedData('CurrentStep');
+	Qualtrics.SurveyEngine.setEmbeddedData('Step' + step + '_ShuffleSequence', sequence);
+	Qualtrics.SurveyEngine.setEmbeddedData('Step' + step + '_ShuffleSequenceLength', sequence.length);
 });
 
 Qualtrics.SurveyEngine.addOnUnload(function () {

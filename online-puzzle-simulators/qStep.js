@@ -8,7 +8,14 @@ Qualtrics.SurveyEngine.addOnReady(function () {
 
 	var step = this.getChoiceAnswerValue();
 
-	Qualtrics.SurveyEngine.setEmbeddedData('stepToSolve', step);
+
+	//Current attempt to get the necessary data to export
+	Qualtrics.SurveyEngine.addEmbeddedData('Step' + step, step);  //Absolute for records
+	Qualtrics.SurveyEngine.addEmbeddedData('CurrentStep', step); //For step tracking within survey (marks last or previous step encountered)
+	Qualtrics.SurveyEngine.addEmbeddedData('Step' + step + '_MoveCounter', '0');
+	Qualtrics.SurveyEngine.addEmbeddedData('Step' + step + '_ShuffleSequence', '');
+	Qualtrics.SurveyEngine.addEmbeddedData('Step' + step + '_ShuffleSequenceLength', '0');
+	Qualtrics.SurveyEngine.addEmbeddedData('Step' + step + '_IsSolved', 'No');
 
 	jQuery("#" + this.questionId).hide();
 
